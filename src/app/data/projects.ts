@@ -1,20 +1,33 @@
 export const projects = [
   {
-    title: 'Mini Estoque Web',
-    description: 'Sistema de controle de estoque simples para pequenas empresas.',
-    tech: ['React', 'Tailwind', 'Firebase'],
-    link: 'https://github.com/seuusuario/mini-estoque',
+    id: '1',
+    title: 'Projeto Legal1',
+    description: 'Descrição do projeto...',
+    tech: ['React', 'Tailwind', 'Vercel'],
+    links: {
+      github: 'https://github.com/seuusuario/projeto-legal',
+      vercel: 'https://projeto-legal.vercel.app'
+    }
   },
   {
-    title: 'Portfólio Profissional',
-    description: 'Landing page responsiva para apresentar perfil profissional.',
-    tech: ['Next.js', 'Tailwind', 'GitHub Pages'],
-    link: 'https://seuusuario.github.io/portfolio',
+    id: '2',
+    title: 'Projeto Legal2',
+    description: 'Descrição do projeto...',
+    tech: ['React', 'Tailwind', 'Vercel'],
+    links: {
+      github: 'https://github.com/seuusuario/projeto-legal',
+      vercel: 'https://projeto-legal.vercel.app'
+    }
   },
   {
-    title: 'Controle Financeiro',
-    description: 'App para gerenciamento de gastos domésticos e metas.',
-    tech: ['React', 'Context API'],
-    link: 'https://github.com/seuusuario/controle-financeiro',
+    id: '3',
+    title: 'Projeto Legal3',
+    description: 'Descrição do projeto...',
+    tech: ['React', 'Tailwind', 'Vercel'],
+    links: {
+      github: 'https://github.com/seuusuario/projeto-legal',
+      vercel: 'https://projeto-legal.vercel.app'
+    }
   },
+  // outros projetos...
 ];
