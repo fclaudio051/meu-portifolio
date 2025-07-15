@@ -11,6 +11,7 @@ import {
   SiTailwindcss,
   SiGit,
   SiGithub,
+  SiOpenai,
 } from 'react-icons/si';
 
 const techs = [
@@ -23,6 +24,8 @@ const techs = [
   { icon: <SiTailwindcss />, label: 'TailwindCSS', color: 'text-teal-400' },
   { icon: <SiGit />, label: 'Git', color: 'text-red-500' },
   { icon: <SiGithub />, label: 'GitHub', color: 'text-gray-800 dark:text-gray-200' },
+  { icon: <SiOpenai />, label: 'OpenAI', color: 'text-green-600 dark:text-green-400' }
+
 ];
 
 export function TechStack() {

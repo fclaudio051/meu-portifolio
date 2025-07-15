@@ -40,7 +40,7 @@ export function About() {
           <div className="bg-zinc-800 border border-zinc-700 rounded-xl p-6 shadow hover:shadow-lg transition-all flex gap-4 items-center">
             <FaCode className="text-4xl text-blue-500" />
             <div>
-              <h3 className="text-3xl font-bold text-white">120+</h3>
+              <h3 className="text-3xl font-bold text-white">4+</h3>
               <p className="text-sm text-zinc-400">Projetos Completos</p>
             </div>
           </div>
@@ -50,7 +50,7 @@ export function About() {
             <FaCheckCircle className="text-4xl text-green-500" />
             <div>
               <h3 className="text-3xl font-bold text-white">95%</h3>
-              <p className="text-sm text-zinc-400">Satisfação dos Clientes</p>
+              <p className="text-sm text-zinc-400">Feedbacks positivos</p>
             </div>
           </div>
 
@@ -59,7 +59,7 @@ export function About() {
             <FaUsers className="text-4xl text-yellow-500" />
             <div>
               <h3 className="text-3xl font-bold text-white">10+</h3>
-              <p className="text-sm text-zinc-400">Clientes Atendidos</p>
+              <p className="text-sm text-zinc-400">Pessoas ajudadas</p>
             </div>
           </div>
 
@@ -70,7 +70,7 @@ export function About() {
               <h3 className="text-base font-semibold text-white">
                 React • Next.js • Tailwind
               </h3>
-              <p className="text-sm text-zinc-400">Habilidades principais</p>
+              <p className="text-sm text-zinc-400">Tecnologias principais</p>
             </div>
           </div>
         </motion.div>

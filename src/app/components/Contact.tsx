@@ -22,7 +22,8 @@ export function Contact() {
 
         <div className="flex justify-center gap-8 text-3xl">
           <a
-            href="mailto:seuemail@email.com"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=fclaudio051@gmail.com"
+            aria-label="Enviar e-mail"
             target="_blank"
             rel="noopener noreferrer"
             className="text-zinc-400 hover:text-blue-500 transition-transform transform hover:scale-110"
@@ -30,7 +31,7 @@ export function Contact() {
             <FaEnvelope />
           </a>
           <a
-            href="https://github.com/seuusuario"
+            href="https://github.com/fclaudio051"
             target="_blank"
             rel="noopener noreferrer"
             className="text-zinc-400 hover:text-blue-500 transition-transform transform hover:scale-110"
@@ -38,7 +39,7 @@ export function Contact() {
             <FaGithub />
           </a>
           <a
-            href="https://linkedin.com/in/seulinkedin"
+            href="https://www.linkedin.com/in/claudio-faustino"
             target="_blank"
             rel="noopener noreferrer"
             className="text-zinc-400 hover:text-blue-500 transition-transform transform hover:scale-110"
