@@ -3,10 +3,10 @@ export const projects = [
     id: '1',
     title: 'Meu Controle Financeiro',
     description: 'Aplicação para controle de finanças pessoais, permitindo o registro de receitas e despesas por pessoa além de um relatórios para acompanhar as movimentações.',
-    tech: ['Nextjs', 'Tailwind', 'TypeScript', 'Vercel'],
+    tech: ['Nextjs', 'Tailwind', 'TypeScript', 'PostgreSQL', 'Express', 'Render', ],
     links: {
       github: 'https://github.com/fclaudio051/meu-controle-financeiro.git',
-      vercel: 'https://meu-controle-financeiro.vercel.app'
+      vercel: 'https://meu-controle-financeiro-frontend.onrender.com/'
     }
   },
   {
