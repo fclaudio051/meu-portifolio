@@ -15,7 +15,7 @@ import {
 } from 'react-icons/si';
 
 const techs = [
-  // ... (código dos techs permanece o mesmo)
+  // ... (o array techs permanece inalterado)
   {
     icon: <SiHtml5 />,
     label: 'HTML5',
@@ -98,6 +98,20 @@ const techs = [
   }
 ];
 
+// Declaração de transições de mola fora das variantes
+const springTransition: Transition = {
+  type: "spring",
+  stiffness: 100,
+  damping: 12
+};
+
+const springTransitionWithDelay = (delay: number): Transition => ({
+  type: "spring",
+  stiffness: 100,
+  damping: 12,
+  delay: delay
+});
+
 export function TechStack() {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -116,26 +130,9 @@ export function TechStack() {
       y: 0,
       opacity: 1,
       scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      } as Transition // Tipagem direta no objeto de transição
+      transition: springTransition, // Usa a constante tipada
     }
   };
-
-  const springTransition: Transition = {
-    type: "spring",
-    stiffness: 100,
-    damping: 12,
-  };
-  
-  const springTransitionWithDelay: (delay: number) => Transition = (delay) => ({
-    type: "spring",
-    stiffness: 100,
-    damping: 12,
-    delay: delay
-  });
 
   return (
     <section
@@ -302,46 +299,6 @@ export function TechStack() {
           </motion.a>
         </motion.div>
       </motion.div>
-
-      {/* ... (código dos elementos decorativos flutuantes) */}
-      <motion.div
-        animate={{
-          rotate: 360,
-          scale: [1, 1.2, 1]
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-        className="absolute top-20 right-20 w-24 h-24 border-2 border-blue-500/20 rounded-full"
-      ></motion.div>
-
-      <motion.div
-        animate={{
-          rotate: -360,
-          y: [0, -20, 0]
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute bottom-20 left-20 w-16 h-16 border-2 border-purple-500/20 rounded-full"
-      ></motion.div>
-
-      <motion.div
-        animate={{
-          x: [0, 30, 0],
-          opacity: [0.3, 0.8, 0.3]
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute top-1/3 left-10 w-6 h-6 bg-blue-400/20 rounded-full"
-      ></motion.div>
     </section>
   );
 }
