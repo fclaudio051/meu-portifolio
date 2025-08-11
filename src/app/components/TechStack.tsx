@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Spring } from 'framer-motion';
 import {
   SiHtml5,
   SiCss3,
@@ -15,87 +15,94 @@ import {
 } from 'react-icons/si';
 
 const techs = [
-  { 
-    icon: <SiHtml5 />, 
-    label: 'HTML5', 
+  {
+    icon: <SiHtml5 />,
+    label: 'HTML5',
     color: 'text-orange-500',
     bgColor: 'from-orange-500/20 to-orange-600/20',
     borderColor: 'border-orange-500/30',
     description: 'Estrutura semântica'
   },
-  { 
-    icon: <SiCss3 />, 
-    label: 'CSS3', 
+  {
+    icon: <SiCss3 />,
+    label: 'CSS3',
     color: 'text-blue-500',
     bgColor: 'from-blue-500/20 to-blue-600/20',
     borderColor: 'border-blue-500/30',
     description: 'Estilização avançada'
   },
-  { 
-    icon: <SiJavascript />, 
-    label: 'JavaScript', 
+  {
+    icon: <SiJavascript />,
+    label: 'JavaScript',
     color: 'text-yellow-400',
     bgColor: 'from-yellow-400/20 to-yellow-500/20',
     borderColor: 'border-yellow-400/30',
     description: 'Lógica interativa'
   },
-  { 
-    icon: <SiTypescript />, 
-    label: 'TypeScript', 
+  {
+    icon: <SiTypescript />,
+    label: 'TypeScript',
     color: 'text-blue-600',
     bgColor: 'from-blue-600/20 to-blue-700/20',
     borderColor: 'border-blue-600/30',
     description: 'JavaScript tipado'
   },
-  { 
-    icon: <SiReact />, 
-    label: 'React', 
+  {
+    icon: <SiReact />,
+    label: 'React',
     color: 'text-cyan-400',
     bgColor: 'from-cyan-400/20 to-cyan-500/20',
     borderColor: 'border-cyan-400/30',
     description: 'Interface moderna'
   },
-  { 
-    icon: <SiNextdotjs />, 
-    label: 'Next.js', 
+  {
+    icon: <SiNextdotjs />,
+    label: 'Next.js',
     color: 'text-white',
     bgColor: 'from-gray-600/20 to-gray-700/20',
     borderColor: 'border-gray-600/30',
     description: 'Framework React'
   },
-  { 
-    icon: <SiTailwindcss />, 
-    label: 'TailwindCSS', 
+  {
+    icon: <SiTailwindcss />,
+    label: 'TailwindCSS',
     color: 'text-teal-400',
     bgColor: 'from-teal-400/20 to-teal-500/20',
     borderColor: 'border-teal-400/30',
     description: 'Utility-first CSS'
   },
-  { 
-    icon: <SiGit />, 
-    label: 'Git', 
+  {
+    icon: <SiGit />,
+    label: 'Git',
     color: 'text-red-500',
     bgColor: 'from-red-500/20 to-red-600/20',
     borderColor: 'border-red-500/30',
     description: 'Controle de versão'
   },
-  { 
-    icon: <SiGithub />, 
-    label: 'GitHub', 
+  {
+    icon: <SiGithub />,
+    label: 'GitHub',
     color: 'text-gray-300',
     bgColor: 'from-gray-500/20 to-gray-600/20',
     borderColor: 'border-gray-500/30',
     description: 'Repositórios'
   },
-  { 
-    icon: <SiOpenai />, 
-    label: 'OpenAI', 
+  {
+    icon: <SiOpenai />,
+    label: 'OpenAI',
     color: 'text-green-400',
     bgColor: 'from-green-400/20 to-green-500/20',
     borderColor: 'border-green-400/30',
     description: 'IA integrada'
   }
 ];
+
+// Define a transição de mola uma vez, usando o tipo Spring do Framer Motion
+const springTransition: Spring = {
+  type: "spring",
+  stiffness: 100,
+  damping: 12
+};
 
 export function TechStack() {
   const containerVariants = {
@@ -115,11 +122,7 @@ export function TechStack() {
       y: 0,
       opacity: 1,
       scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
+      transition: springTransition // Usa a constante tipada
     }
   };
 
@@ -131,7 +134,7 @@ export function TechStack() {
       {/* Background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
-      
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -143,48 +146,48 @@ export function TechStack() {
           variants={itemVariants}
           className="mb-16"
         >
-          <motion.h2 
+          <motion.h2
             className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-400 bg-clip-text text-transparent mb-6"
             whileInView={{ scale: [0.9, 1] }}
-            transition={{ duration: 0.6 }}
+            transition={{ type: "spring", stiffness: 100 } as Spring} // Usa o casting de tipo para a transição
           >
             🧠 Tecnologias que Domino
           </motion.h2>
-          
+
           <motion.p
             variants={itemVariants}
             className="text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed"
           >
             Ferramentas modernas para criar experiências digitais excepcionais
           </motion.p>
-          
+
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mt-6"></div>
         </motion.div>
 
         {/* Tech grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center"
           variants={containerVariants}
         >
-          {techs.map((tech, index) => (
+          {techs.map((tech) => (
             <motion.div
               key={tech.label}
               variants={itemVariants}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.1,
                 y: -10,
                 rotateY: 10
               }}
               whileTap={{ scale: 0.95 }}
               className={`group relative bg-gradient-to-br ${tech.bgColor} backdrop-blur-sm
-                         border ${tech.borderColor} rounded-2xl p-6 w-full max-w-[180px] h-[160px]
-                         hover:shadow-2xl hover:shadow-${tech.color.split('-')[1]}-500/20 transition-all duration-500
-                         overflow-hidden cursor-pointer`}
+                          border ${tech.borderColor} rounded-2xl p-6 w-full max-w-[180px] h-[160px]
+                          hover:shadow-2xl hover:shadow-${tech.color.split('-')[1]}-500/20 transition-all duration-500
+                          overflow-hidden cursor-pointer`}
               style={{ transformStyle: "preserve-3d" }}
             >
               {/* Glow effect */}
               <div className={`absolute -inset-1 bg-gradient-to-r ${tech.bgColor} rounded-2xl blur opacity-0 group-hover:opacity-60 transition duration-500`}></div>
-              
+
               {/* Icon */}
               <motion.div
                 whileHover={{ rotate: 360, scale: 1.2 }}
@@ -229,14 +232,14 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+              transition={{ type: "spring", stiffness: 100, delay: 0.2 } as Spring} // Usa o casting de tipo
               className="text-4xl font-bold text-blue-400 mb-2"
             >
               3+
             </motion.div>
             <p className="text-zinc-400">Anos de experiência</p>
           </motion.div>
-          
+
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="text-center"
@@ -244,14 +247,14 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
+              transition={{ type: "spring", stiffness: 100, delay: 0.4 } as Spring} // Usa o casting de tipo
               className="text-4xl font-bold text-purple-400 mb-2"
             >
               10+
             </motion.div>
             <p className="text-zinc-400">Tecnologias dominadas</p>
           </motion.div>
-          
+
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="text-center"
@@ -259,7 +262,7 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 100, delay: 0.6 }}
+              transition={{ type: "spring", stiffness: 100, delay: 0.6 } as Spring} // Usa o casting de tipo
               className="text-4xl font-bold text-green-400 mb-2"
             >
               100%
@@ -275,14 +278,14 @@ export function TechStack() {
         >
           <motion.a
             href="#projects"
-            whileHover={{ 
+            whileHover={{
               scale: 1.05,
               boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)"
             }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 
-                       text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 
-                       shadow-lg hover:shadow-blue-500/25"
+            className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700
+                         text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300
+                         shadow-lg hover:shadow-blue-500/25"
           >
             Ver Projetos em Ação 🚀
           </motion.a>
@@ -291,40 +294,40 @@ export function TechStack() {
 
       {/* Floating decorative elements */}
       <motion.div
-        animate={{ 
+        animate={{
           rotate: 360,
           scale: [1, 1.2, 1]
         }}
-        transition={{ 
-          duration: 30, 
-          repeat: Infinity, 
-          ease: "linear" 
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: "linear"
         }}
         className="absolute top-20 right-20 w-24 h-24 border-2 border-blue-500/20 rounded-full"
       ></motion.div>
-      
+
       <motion.div
-        animate={{ 
+        animate={{
           rotate: -360,
           y: [0, -20, 0]
         }}
-        transition={{ 
-          duration: 25, 
-          repeat: Infinity, 
-          ease: "easeInOut" 
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "easeInOut"
         }}
         className="absolute bottom-20 left-20 w-16 h-16 border-2 border-purple-500/20 rounded-full"
       ></motion.div>
 
       <motion.div
-        animate={{ 
+        animate={{
           x: [0, 30, 0],
           opacity: [0.3, 0.8, 0.3]
         }}
-        transition={{ 
-          duration: 12, 
-          repeat: Infinity, 
-          ease: "easeInOut" 
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut"
         }}
         className="absolute top-1/3 left-10 w-6 h-6 bg-blue-400/20 rounded-full"
       ></motion.div>
