@@ -98,20 +98,6 @@ const techs = [
   }
 ];
 
-// Declaração de transições de mola fora das variantes
-const springTransition: Transition = {
-  type: "spring",
-  stiffness: 100,
-  damping: 12
-};
-
-const springTransitionWithDelay = (delay: number): Transition => ({
-  type: "spring",
-  stiffness: 100,
-  damping: 12,
-  delay: delay
-});
-
 export function TechStack() {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -124,13 +110,19 @@ export function TechStack() {
     }
   };
 
+  // Correção aplicada aqui: o objeto de transição é tipado diretamente
+  // no objeto `itemVariants`, o que ajuda o TypeScript a reconhecê-lo.
   const itemVariants: Variants = {
     hidden: { y: 50, opacity: 0, scale: 0.8 },
     visible: {
       y: 0,
       opacity: 1,
       scale: 1,
-      transition: springTransition, // Usa a constante tipada
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+      } as Transition, // Tipagem explícita para o objeto de transição
     }
   };
 
@@ -157,7 +149,8 @@ export function TechStack() {
           <motion.h2
             className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-400 bg-clip-text text-transparent mb-6"
             whileInView={{ scale: [0.9, 1] }}
-            transition={springTransition}
+            // Correção aplicada aqui: tipagem explícita para a transição
+            transition={{ type: "spring", stiffness: 100 } as Transition}
           >
             🧠 Tecnologias que Domino
           </motion.h2>
@@ -240,7 +233,8 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={springTransitionWithDelay(0.2)}
+              // Correção aplicada aqui: tipagem explícita para a transição
+              transition={{ type: "spring", stiffness: 100, delay: 0.2 } as Transition}
               className="text-4xl font-bold text-blue-400 mb-2"
             >
               3+
@@ -255,7 +249,8 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={springTransitionWithDelay(0.4)}
+              // Correção aplicada aqui: tipagem explícita para a transição
+              transition={{ type: "spring", stiffness: 100, delay: 0.4 } as Transition}
               className="text-4xl font-bold text-purple-400 mb-2"
             >
               10+
@@ -270,7 +265,8 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={springTransitionWithDelay(0.6)}
+              // Correção aplicada aqui: tipagem explícita para a transição
+              transition={{ type: "spring", stiffness: 100, delay: 0.6 } as Transition}
               className="text-4xl font-bold text-green-400 mb-2"
             >
               100%
