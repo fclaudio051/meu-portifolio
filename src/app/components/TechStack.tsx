@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, type Spring } from 'framer-motion';
+import { motion, type Variants, type Transition } from 'framer-motion';
 import {
   SiHtml5,
   SiCss3,
@@ -15,6 +15,7 @@ import {
 } from 'react-icons/si';
 
 const techs = [
+  // ... (código dos techs permanece o mesmo)
   {
     icon: <SiHtml5 />,
     label: 'HTML5',
@@ -97,15 +98,8 @@ const techs = [
   }
 ];
 
-// Define a transição de mola uma vez, usando o tipo Spring do Framer Motion
-const springTransition: Spring = {
-  type: "spring",
-  stiffness: 100,
-  damping: 12
-};
-
 export function TechStack() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -116,22 +110,39 @@ export function TechStack() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 50, opacity: 0, scale: 0.8 },
     visible: {
       y: 0,
       opacity: 1,
       scale: 1,
-      transition: springTransition // Usa a constante tipada
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      } as Transition // Tipagem direta no objeto de transição
     }
   };
+
+  const springTransition: Transition = {
+    type: "spring",
+    stiffness: 100,
+    damping: 12,
+  };
+  
+  const springTransitionWithDelay: (delay: number) => Transition = (delay) => ({
+    type: "spring",
+    stiffness: 100,
+    damping: 12,
+    delay: delay
+  });
 
   return (
     <section
       id="tech"
       className="relative py-24 bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-800 text-center overflow-hidden"
     >
-      {/* Background effects */}
+      {/* ... (código dos efeitos de fundo) */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
 
@@ -149,7 +160,7 @@ export function TechStack() {
           <motion.h2
             className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-400 bg-clip-text text-transparent mb-6"
             whileInView={{ scale: [0.9, 1] }}
-            transition={{ type: "spring", stiffness: 100 } as Spring} // Usa o casting de tipo para a transição
+            transition={springTransition}
           >
             🧠 Tecnologias que Domino
           </motion.h2>
@@ -232,7 +243,7 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 100, delay: 0.2 } as Spring} // Usa o casting de tipo
+              transition={springTransitionWithDelay(0.2)}
               className="text-4xl font-bold text-blue-400 mb-2"
             >
               3+
@@ -247,7 +258,7 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 100, delay: 0.4 } as Spring} // Usa o casting de tipo
+              transition={springTransitionWithDelay(0.4)}
               className="text-4xl font-bold text-purple-400 mb-2"
             >
               10+
@@ -262,7 +273,7 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 100, delay: 0.6 } as Spring} // Usa o casting de tipo
+              transition={springTransitionWithDelay(0.6)}
               className="text-4xl font-bold text-green-400 mb-2"
             >
               100%
@@ -292,7 +303,7 @@ export function TechStack() {
         </motion.div>
       </motion.div>
 
-      {/* Floating decorative elements */}
+      {/* ... (código dos elementos decorativos flutuantes) */}
       <motion.div
         animate={{
           rotate: 360,
