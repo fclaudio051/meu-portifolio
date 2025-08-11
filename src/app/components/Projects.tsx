@@ -1,15 +1,15 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { 
-  FaGithub, 
-  FaExternalLinkAlt, 
-  FaUsers, 
-  FaCode, 
-  FaMobile, 
-  FaDatabase, 
-  FaRocket, 
-  FaChartLine 
+import { motion, type Transition } from 'framer-motion';
+import {
+  FaGithub,
+  FaExternalLinkAlt,
+  FaUsers,
+  FaCode,
+  FaMobile,
+  FaDatabase,
+  FaRocket,
+  FaChartLine
 } from 'react-icons/fa';
 
 interface ProjectLinks {
@@ -86,6 +86,8 @@ const PROJECTS: Project[] = [
   }
 ];
 
+const bezierEase: Transition['ease'] = [0.22, 1, 0.36, 1];
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -103,7 +105,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1]
+      ease: bezierEase // Usando a constante tipada
     }
   }
 };
@@ -117,7 +119,6 @@ const ProjectCard = ({ project }: { project: Project }) => {
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
       <div className="relative h-full bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-3xl overflow-hidden hover:border-zinc-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/5 flex flex-col">
-        
         {/* Gradient overlay */}
         <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
         
@@ -211,8 +212,8 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
 export function Projects() {
   return (
-    <section 
-      id="projects" 
+    <section
+      id="projects"
       className="relative bg-zinc-950 text-white py-24 px-6 overflow-hidden"
       aria-labelledby="projects-title"
     >
@@ -225,7 +226,7 @@ export function Projects() {
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, ease: bezierEase }} 
           viewport={{ once: true }}
         >
           <h2 id="projects-title" className="text-4xl md:text-6xl font-bold mb-6">
@@ -254,8 +255,8 @@ export function Projects() {
           viewport={{ once: true, margin: "-100px" }}
         >
           {PROJECTS.map((project) => (
-            <ProjectCard 
-              key={project.id} 
+            <ProjectCard
+              key={project.id}
               project={project}
             />
           ))}
