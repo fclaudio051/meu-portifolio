@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, type Variants, type Transition } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import {
   SiHtml5,
   SiCss3,
@@ -110,29 +110,32 @@ export function TechStack() {
     },
   };
 
-  // Correção definitiva: a transição é tipada como 'any' para evitar o erro do tipo de string
-  // no ambiente de compilação, e as propriedades adicionais são mantidas.
-  const springTransition: Transition = {
-    type: "spring" as any,
-    stiffness: 100,
-    damping: 12,
-  };
-
-  const itemVariants: Variants = {
+  // Correção definitiva: Usamos 'as const' para que o TypeScript infira o tipo
+  // de 'type' como a string literal "spring", resolvendo a incompatibilidade.
+  const itemVariants = {
     hidden: { y: 50, opacity: 0, scale: 0.8 },
     visible: {
       y: 0,
       opacity: 1,
       scale: 1,
-      transition: springTransition,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+      },
     },
-  };
-
-  const springTransitionWithDelay = (delay: number): Transition => ({
-    type: "spring" as any,
-    stiffness: 100,
-    damping: 12,
-    delay,
+  } as const satisfies Variants;
+  
+  // Criamos uma transição separada para reusar, também usando 'as const'
+  const springTransition = {
+    type: "spring",
+    stiffness: 100
+  } as const;
+  
+  // E uma função para as transições com delay
+  const springTransitionWithDelay = (delay: number) => ({
+    ...springTransition,
+    delay
   });
 
   return (
@@ -150,6 +153,7 @@ export function TechStack() {
         className="max-w-6xl mx-auto px-6 relative z-10"
       >
         <motion.div
+          // O itemVariants agora é um tipo 'const', resolvendo o problema
           variants={itemVariants}
           className="mb-16"
         >
