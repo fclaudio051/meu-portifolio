@@ -105,20 +105,17 @@ export function TechStack() {
       opacity: 1,
       transition: {
         delayChildren: 0.3,
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
-  // Nova abordagem: Crie uma função para retornar a transição,
-  // isso força o compilador a inferir o tipo corretamente.
-  const createSpringTransition = (delay?: number): Transition => {
-    return {
-      type: "spring",
-      stiffness: 100,
-      damping: 12,
-      ...(delay && { delay }),
-    };
+  // Correção definitiva: a transição é tipada como 'any' para evitar o erro do tipo de string
+  // no ambiente de compilação, e as propriedades adicionais são mantidas.
+  const springTransition: Transition = {
+    type: "spring" as any,
+    stiffness: 100,
+    damping: 12,
   };
 
   const itemVariants: Variants = {
@@ -127,16 +124,22 @@ export function TechStack() {
       y: 0,
       opacity: 1,
       scale: 1,
-      transition: createSpringTransition(),
-    }
+      transition: springTransition,
+    },
   };
+
+  const springTransitionWithDelay = (delay: number): Transition => ({
+    type: "spring" as any,
+    stiffness: 100,
+    damping: 12,
+    delay,
+  });
 
   return (
     <section
       id="tech"
       className="relative py-24 bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-800 text-center overflow-hidden"
     >
-      {/* ... (código dos efeitos de fundo) */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
 
@@ -146,7 +149,6 @@ export function TechStack() {
         whileInView="visible"
         className="max-w-6xl mx-auto px-6 relative z-10"
       >
-        {/* Header */}
         <motion.div
           variants={itemVariants}
           className="mb-16"
@@ -154,7 +156,7 @@ export function TechStack() {
           <motion.h2
             className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-400 bg-clip-text text-transparent mb-6"
             whileInView={{ scale: [0.9, 1] }}
-            transition={createSpringTransition()}
+            transition={springTransition}
           >
             🧠 Tecnologias que Domino
           </motion.h2>
@@ -169,7 +171,6 @@ export function TechStack() {
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mt-6"></div>
         </motion.div>
 
-        {/* Tech grid */}
         <motion.div
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center"
           variants={containerVariants}
@@ -190,10 +191,7 @@ export function TechStack() {
                           overflow-hidden cursor-pointer`}
               style={{ transformStyle: "preserve-3d" }}
             >
-              {/* Glow effect */}
               <div className={`absolute -inset-1 bg-gradient-to-r ${tech.bgColor} rounded-2xl blur opacity-0 group-hover:opacity-60 transition duration-500`}></div>
-
-              {/* Icon */}
               <motion.div
                 whileHover={{ rotate: 360, scale: 1.2 }}
                 transition={{ duration: 0.6 }}
@@ -201,8 +199,6 @@ export function TechStack() {
               >
                 {tech.icon}
               </motion.div>
-
-              {/* Content */}
               <div className="relative z-10 text-center">
                 <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-blue-400 transition-colors duration-300">
                   {tech.label}
@@ -211,12 +207,8 @@ export function TechStack() {
                   {tech.description}
                 </p>
               </div>
-
-              {/* Floating particles */}
               <div className="absolute top-2 right-2 w-1 h-1 bg-white/20 rounded-full animate-ping"></div>
               <div className="absolute bottom-2 left-2 w-1 h-1 bg-blue-400/40 rounded-full animate-pulse"></div>
-
-              {/* Hover overlay */}
               <motion.div
                 className={`absolute inset-0 bg-gradient-to-br ${tech.bgColor} opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity duration-500`}
                 style={{ pointerEvents: 'none' }}
@@ -225,7 +217,6 @@ export function TechStack() {
           ))}
         </motion.div>
 
-        {/* Stats section */}
         <motion.div
           variants={itemVariants}
           className="mt-20 grid sm:grid-cols-3 gap-8"
@@ -237,7 +228,7 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={createSpringTransition(0.2)}
+              transition={springTransitionWithDelay(0.2)}
               className="text-4xl font-bold text-blue-400 mb-2"
             >
               3+
@@ -252,7 +243,7 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={createSpringTransition(0.4)}
+              transition={springTransitionWithDelay(0.4)}
               className="text-4xl font-bold text-purple-400 mb-2"
             >
               10+
@@ -267,7 +258,7 @@ export function TechStack() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={createSpringTransition(0.6)}
+              transition={springTransitionWithDelay(0.6)}
               className="text-4xl font-bold text-green-400 mb-2"
             >
               100%
@@ -276,7 +267,6 @@ export function TechStack() {
           </motion.div>
         </motion.div>
 
-        {/* Call to action */}
         <motion.div
           variants={itemVariants}
           className="mt-16"
