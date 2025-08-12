@@ -58,7 +58,7 @@ export function Footer() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="flex justify-center gap-6"
           >
-            {socialLinks.map((link, index) => (
+            {socialLinks.map((link) => (
               <motion.a
                 key={link.label}
                 href={link.href}

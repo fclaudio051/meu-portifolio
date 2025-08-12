@@ -1,6 +1,7 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
+import type { Transition } from 'framer-motion';
 import {
   SiHtml5,
   SiCss3,
@@ -97,41 +98,13 @@ const techs = [
   }
 ];
 
-export function TechStack() {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  // Correção definitiva: a transição é tipada como 'any' para evitar o erro do tipo de string
-  // no ambiente de compilação.
-  const itemVariants: Variants = {
-    hidden: { y: 50, opacity: 0, scale: 0.8 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12,
-      } as any,
-    },
-  };
-
-  const springTransitionWithDelay = (delay: number) => ({
+export default function TechStack() {
+  // A transição de mola simplificada e segura
+  const springTransition: Transition = {
     type: "spring",
     stiffness: 100,
-    damping: 12,
-    delay,
-  }) as any;
-
+    damping: 12
+  };
   return (
     <section
       id="tech"
@@ -140,26 +113,26 @@ export function TechStack() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        className="max-w-6xl mx-auto px-6 relative z-10"
-      >
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        {/* Header */}
         <motion.div
-          variants={itemVariants}
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={springTransition}
           className="mb-16"
         >
           <motion.h2
             className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-400 bg-clip-text text-transparent mb-6"
             whileInView={{ scale: [0.9, 1] }}
-            transition={{ type: "spring", stiffness: 100 } as any}
+            transition={springTransition}
           >
             🧠 Tecnologias que Domino
           </motion.h2>
 
           <motion.p
-            variants={itemVariants}
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ ...springTransition, delay: 0.1 }}
             className="text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed"
           >
             Ferramentas modernas para criar experiências digitais excepcionais
@@ -168,20 +141,16 @@ export function TechStack() {
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mt-6"></div>
         </motion.div>
 
-        <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center"
-          variants={containerVariants}
-        >
-          {techs.map((tech) => (
+        {/* Tech grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center">
+          {techs.map((tech, index) => (
             <motion.div
               key={tech.label}
-              variants={itemVariants}
-              whileHover={{
-                scale: 1.1,
-                y: -10,
-                rotateY: 10
-              }}
+              initial={{ y: 50, opacity: 0, scale: 0.8 }}
+              whileInView={{ y: 0, opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.1, y: -10, rotateY: 10 }}
               whileTap={{ scale: 0.95 }}
+              transition={{ ...springTransition, delay: 0.1 * index }}
               className={`group relative bg-gradient-to-br ${tech.bgColor} backdrop-blur-sm
                           border ${tech.borderColor} rounded-2xl p-6 w-full max-w-[180px] h-[160px]
                           hover:shadow-2xl hover:shadow-${tech.color.split('-')[1]}-500/20 transition-all duration-500
@@ -212,60 +181,49 @@ export function TechStack() {
               />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={itemVariants}
-          className="mt-20 grid sm:grid-cols-3 gap-8"
-        >
+        {/* Stats section */}
+        <div className="mt-20 grid sm:grid-cols-3 gap-8">
           <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            transition={{ ...springTransition, delay: 0.2 }}
             whileHover={{ scale: 1.05 }}
             className="text-center"
           >
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={springTransitionWithDelay(0.2)}
-              className="text-4xl font-bold text-blue-400 mb-2"
-            >
-              3+
-            </motion.div>
+            <div className="text-4xl font-bold text-blue-400 mb-2">3+</div>
             <p className="text-zinc-400">Anos de experiência</p>
           </motion.div>
 
           <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            transition={{ ...springTransition, delay: 0.4 }}
             whileHover={{ scale: 1.05 }}
             className="text-center"
           >
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={springTransitionWithDelay(0.4)}
-              className="text-4xl font-bold text-purple-400 mb-2"
-            >
-              10+
-            </motion.div>
+            <div className="text-4xl font-bold text-purple-400 mb-2">10+</div>
             <p className="text-zinc-400">Tecnologias dominadas</p>
           </motion.div>
 
           <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            transition={{ ...springTransition, delay: 0.6 }}
             whileHover={{ scale: 1.05 }}
             className="text-center"
           >
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={springTransitionWithDelay(0.6)}
-              className="text-4xl font-bold text-green-400 mb-2"
-            >
-              100%
-            </motion.div>
+            <div className="text-4xl font-bold text-green-400 mb-2">100%</div>
             <p className="text-zinc-400">Dedicação aos projetos</p>
           </motion.div>
-        </motion.div>
+        </div>
 
+        {/* Call to action */}
         <motion.div
-          variants={itemVariants}
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ ...springTransition, delay: 0.8 }}
           className="mt-16"
         >
           <motion.a
@@ -282,7 +240,7 @@ export function TechStack() {
             Ver Projetos em Ação 🚀
           </motion.a>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
