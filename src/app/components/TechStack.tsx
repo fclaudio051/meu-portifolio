@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import type { Transition } from 'framer-motion';
 import {
   SiHtml5,
   SiCss3,
@@ -98,13 +97,13 @@ const techs = [
   }
 ];
 
-export default function TechStack() {
-  // A transição de mola simplificada e segura
-  const springTransition: Transition = {
+export function TechStack() {
+  const springTransition = {
     type: "spring",
     stiffness: 100,
-    damping: 12
+    damping: 12,
   };
+
   return (
     <section
       id="tech"
@@ -128,7 +127,6 @@ export default function TechStack() {
           >
             🧠 Tecnologias que Domino
           </motion.h2>
-
           <motion.p
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -137,7 +135,6 @@ export default function TechStack() {
           >
             Ferramentas modernas para criar experiências digitais excepcionais
           </motion.p>
-
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mt-6"></div>
         </motion.div>
 
