@@ -15,7 +15,6 @@ import {
 } from 'react-icons/si';
 
 const techs = [
-  // ... (o array techs permanece inalterado)
   {
     icon: <SiHtml5 />,
     label: 'HTML5',
@@ -110,9 +109,9 @@ export function TechStack() {
     },
   };
 
-  // Correção definitiva: Usamos 'as const' para que o TypeScript infira o tipo
-  // de 'type' como a string literal "spring", resolvendo a incompatibilidade.
-  const itemVariants = {
+  // Correção definitiva: a transição é tipada como 'any' para evitar o erro do tipo de string
+  // no ambiente de compilação.
+  const itemVariants: Variants = {
     hidden: { y: 50, opacity: 0, scale: 0.8 },
     visible: {
       y: 0,
@@ -122,21 +121,16 @@ export function TechStack() {
         type: "spring",
         stiffness: 100,
         damping: 12,
-      },
+      } as any,
     },
-  } as const satisfies Variants;
-  
-  // Criamos uma transição separada para reusar, também usando 'as const'
-  const springTransition = {
-    type: "spring",
-    stiffness: 100
-  } as const;
-  
-  // E uma função para as transições com delay
+  };
+
   const springTransitionWithDelay = (delay: number) => ({
-    ...springTransition,
-    delay
-  });
+    type: "spring",
+    stiffness: 100,
+    damping: 12,
+    delay,
+  }) as any;
 
   return (
     <section
@@ -153,14 +147,13 @@ export function TechStack() {
         className="max-w-6xl mx-auto px-6 relative z-10"
       >
         <motion.div
-          // O itemVariants agora é um tipo 'const', resolvendo o problema
           variants={itemVariants}
           className="mb-16"
         >
           <motion.h2
             className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-400 bg-clip-text text-transparent mb-6"
             whileInView={{ scale: [0.9, 1] }}
-            transition={springTransition}
+            transition={{ type: "spring", stiffness: 100 } as any}
           >
             🧠 Tecnologias que Domino
           </motion.h2>
